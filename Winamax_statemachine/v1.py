@@ -70,9 +70,6 @@ class player_state():
         # output init
         self.rounds = 0
         
-        # winner:
-        self.winner = -1 #1 or 2, PAT
-        
         return
 
     ##### functions #####
@@ -80,6 +77,8 @@ class player_state():
         """
         Each player puts a card on his stack
         Update decks and stacks
+        /!\ will return an error if len(deck) < 1 ! Error is used later on
+
         """
         # each player puts a card on his stack
         card_1 = self.deck_1.pop(0)
@@ -89,7 +88,7 @@ class player_state():
         
         return
 
-    def declare_winner(self):    
+    def declare_battle_winner(self):    
         """
         Find winner of battle
         """
@@ -142,7 +141,7 @@ class player_state():
         # 1. battle phase
         self.make_battle()   
         # 2. find outcome
-        outcome = self.declare_winner()  
+        outcome = self.declare_battle_winner()  
         # 3. entering war phase   
         if outcome == 0:
             while outcome == 0:
@@ -153,7 +152,7 @@ class player_state():
                     # ii. make battle
                     self.make_battle()
                     # iii. find winner
-                    outcome = self.declare_winner()
+                    outcome = self.declare_battle_winner()
                     
                 # If a player has no cards during war: PAT
                 except:
@@ -179,7 +178,7 @@ class player_state():
             #single round
             self.play_one_round()
           
-        # finding the winner
+        # finding game winner
         if self.deck_1 != [] and self.deck_2 == []:
             print(1, self.rounds)
         elif self.deck_1 == [] and self.deck_2 != []:

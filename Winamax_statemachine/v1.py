@@ -122,7 +122,7 @@ class player_state():
             self.deck_1 += self.war_stack_2
             self.war_stack_1 = []
             self.war_stack_2 = []         
-        
+         
         elif outcome == 2:
             self. deck_2 += self.war_stack_1
             self.deck_2 += self.war_stack_2
